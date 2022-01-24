@@ -7,9 +7,9 @@ class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // set: new Set(),
+      set: new Set(),
       // dummy data. should replace it into the above one!
-      set: new Set(["a", "b", "c"]),
+      // set: new Set(["a", "b", "c"]),
     }
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
     this.handleNewTask = this.handleNewTask.bind(this);
@@ -19,7 +19,7 @@ class TodoList extends React.Component {
     var newset = new Set(this.state.set);
     newset.delete(deleteTask);
     this.setState({set: newset});
-    // alert(Array.from(newset));
+    alert('delete \"' + deleteTask + '\" in task pool');
   }
 
   handleNewTask(newTask) {
@@ -27,14 +27,26 @@ class TodoList extends React.Component {
     // TODO: should check newTask already exists in set.
     // I will implement it by using "has" attribute of Set structure.
     // Notice: preventDefault.... should be added.
+    if (this.state.set.has(newTask)) {
+      // the task exists already in task pool!
+      alert('\"' + newTask + '\" exists already in task pool!');
+
+      return;
+    }
 
 
     // TODO: also should check the vaildity of input data.
     // e.g. task_name should not to be empty.
 
+    alert('new task: \"' + newTask + '\"');
+
     var newset = new Set(this.state.set);
     newset.add(newTask);
     this.setState({set: newset});
+    
+
+    // Test
+    // alert(Array.from(newset));
   }
 
   render() {
